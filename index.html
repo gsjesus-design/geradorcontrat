@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Mensagem - Contratação SVC</title>
+    <title>Gerador Oferta - Pescadores</title>
     <style>
         * {
             margin: 0;
@@ -66,7 +66,7 @@
             font-size: 12px;
         }
         
-        input, textarea {
+        input, textarea, select {
             width: 100%;
             padding: 12px;
             border: 2px solid #e0e0e0;
@@ -76,7 +76,12 @@
             font-family: inherit;
         }
         
-        input:focus, textarea:focus {
+        select {
+            cursor: pointer;
+            background-color: white;
+        }
+        
+        input:focus, textarea:focus, select:focus {
             outline: none;
             border-color: #667eea;
         }
@@ -199,6 +204,12 @@
             gap: 20px;
         }
         
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        
         .alert {
             padding: 12px;
             border-radius: 6px;
@@ -227,8 +238,8 @@
             display: none;
         }
         
-        @media (max-width: 600px) {
-            .grid {
+        @media (max-width: 768px) {
+            .grid, .grid-3 {
                 grid-template-columns: 1fr;
             }
             
@@ -252,7 +263,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>📋 Gerador de Mensagem SVC</h1>
+            <h1>🎣 Gerador Oferta - Pescadores</h1>
             <p>Preencha os campos abaixo para gerar a mensagem de contratação</p>
         </div>
         
@@ -264,8 +275,8 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="cidade">Cidade (ex: SBA1 - Salvador)</label>
-                    <input type="text" id="cidade" placeholder="SBA1 - Salvador" required>
+                    <label for="svcxd">SVC/XD</label>
+                    <input type="text" id="svcxd" placeholder="Ex: SBA1 - Salvador" required>
                 </div>
                 
                 <div class="form-group">
@@ -288,7 +299,18 @@
                 <div class="grid">
                     <div class="form-group">
                         <label for="perfil">Perfil do Veículo</label>
-                        <input type="text" id="perfil" placeholder="UTILITÁRIO, HR, etc." required>
+                        <select id="perfil" required>
+                            <option value="">Selecione...</option>
+                            <option value="PASSEIO">PASSEIO</option>
+                            <option value="UTILITÁRIO">UTILITÁRIO</option>
+                            <option value="VAN">VAN</option>
+                            <option value="HR">HR</option>
+                            <option value="VUC">VUC</option>
+                            <option value="MÉDIO">MÉDIO</option>
+                            <option value="TOCO">TOCO</option>
+                            <option value="TRUCK">TRUCK</option>
+                            <option value="CARRETA">CARRETA</option>
+                        </select>
                     </div>
                     
                     <div class="form-group">
@@ -322,6 +344,34 @@
                 <div class="form-group">
                     <label for="etc">ETC <span class="optional">(opcional)</span></label>
                     <input type="text" id="etc" placeholder="3A+ Kangu">
+                </div>
+                
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label for="frota">Frota</label>
+                        <select id="frota" required>
+                            <option value="">Selecione...</option>
+                            <option value="Fixa">Fixa</option>
+                            <option value="Spot">Spot</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="milha">Milha</label>
+                        <select id="milha" required>
+                            <option value="">Selecione...</option>
+                            <option value="First Mile">First Mile</option>
+                            <option value="Last Mile">Last Mile</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" required>
+                            <option value="">Selecione...</option>
+                            <option value="Enviado para cadastro">Enviado para cadastro</option>
+                        </select>
+                    </div>
                 </div>
                 
                 <div class="form-group">
@@ -363,6 +413,9 @@
         <input type="text" name="entry.124597455" id="formCluster">
         <input type="text" name="entry.1795315425" id="formEtc">
         <input type="text" name="entry.113313044" id="formPerfilVeiculo">
+        <input type="text" name="entry.1745259130" id="formFrota">
+        <input type="text" name="entry.497551426" id="formMilha">
+        <input type="text" name="entry.1013682616" id="formStatus">
     </form>
     
     <script>
@@ -374,17 +427,20 @@
             
             // Pegar os valores
             const assistente = document.getElementById('assistente').value;
-            const cidade = document.getElementById('cidade').value;
+            const svcxd = document.getElementById('svcxd').value;
             const motorista = document.getElementById('motorista').value.toUpperCase();
             const cpf = document.getElementById('cpf').value;
             const tel = document.getElementById('tel').value;
-            const perfil = document.getElementById('perfil').value.toUpperCase();
+            const perfil = document.getElementById('perfil').value;
             const placa = document.getElementById('placa').value;
             const email = document.getElementById('email').value;
             const demanda = document.getElementById('demanda').value;
             const cavalo = document.getElementById('cavalo').value.trim() || '-';
             const cluster = document.getElementById('cluster').value.trim() || '-';
             const etc = document.getElementById('etc').value.trim() || '';
+            const frota = document.getElementById('frota').value;
+            const milha = document.getElementById('milha').value;
+            const status = document.getElementById('status').value;
             const obs = document.getElementById('obs').value.trim();
             
             // Guardar dados para enviar ao Sheets
@@ -398,11 +454,14 @@
                 cpf: cpf,
                 cluster: cluster,
                 etc: etc,
-                perfilVeiculo: perfil
+                perfilVeiculo: perfil,
+                frota: frota,
+                milha: milha,
+                status: status
             };
             
             // Montar a mensagem
-            mensagemGerada = `CONTRATAÇÃO SVC: ${cidade}\n• Motorista: ${motorista}\n• CPF: ${cpf}\n• Tel: ${tel}\n• Perfil do Veiculo: ${perfil}\n• Placa: ${placa}\n• E-mail: ${email}\n• Demanda: ${demanda}`;
+            mensagemGerada = `CONTRATAÇÃO: ${svcxd}\n• Motorista: ${motorista}\n• CPF: ${cpf}\n• Tel: ${tel}\n• Perfil do Veiculo: ${perfil}\n• Placa: ${placa}\n• E-mail: ${email}\n• Demanda: ${demanda}`;
             
             // Adicionar campos opcionais apenas se preenchidos
             if (cavalo !== '-') {
@@ -414,6 +473,12 @@
             if (etc) {
                 mensagemGerada += `\n• ETC: ${etc}`;
             }
+            
+            // Adicionar campos obrigatórios
+            mensagemGerada += `\n• Frota: ${frota}`;
+            mensagemGerada += `\n• Milha: ${milha}`;
+            mensagemGerada += `\n• Status: ${status}`;
+            
             if (obs) {
                 mensagemGerada += `\n${obs} 📲`;
             }
@@ -472,6 +537,9 @@
             document.getElementById('formCluster').value = dadosContratacao.cluster;
             document.getElementById('formEtc').value = dadosContratacao.etc;
             document.getElementById('formPerfilVeiculo').value = dadosContratacao.perfilVeiculo;
+            document.getElementById('formFrota').value = dadosContratacao.frota;
+            document.getElementById('formMilha').value = dadosContratacao.milha;
+            document.getElementById('formStatus').value = dadosContratacao.status;
             
             // Enviar o formulário
             document.getElementById('googleForm').submit();
