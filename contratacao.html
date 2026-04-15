@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador - Contratação</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0F9D58 0%, #0d7d47 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0F9D58 0%, #0d7d47 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .optional {
+            color: #999;
+            font-weight: 400;
+            font-size: 12px;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+        
+        select {
+            cursor: pointer;
+            background-color: white;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #0F9D58;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #0F9D58 0%, #0d7d47 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(15, 157, 88, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .output-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .output-header h3 {
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .copy-btn, .whatsapp-btn, .sheets-btn {
+            padding: 8px 16px;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        
+        .copy-btn {
+            background: #28a745;
+        }
+        
+        .copy-btn:hover {
+            background: #218838;
+        }
+        
+        .copy-btn.copied {
+            background: #6c757d;
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+        
+        .sheets-btn {
+            background: #0F9D58;
+        }
+        
+        .sheets-btn:hover {
+            background: #0d7d47;
+        }
+        
+        .sheets-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .output-text {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            border: 2px solid #e0e0e0;
+            color: #333;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .alert {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status-message {
+            display: none;
+            margin-top: 10px;
+        }
+        
+        #googleForm {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .grid, .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .output-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .copy-btn, .whatsapp-btn, .sheets-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✅ Gerador - Contratação</h1>
+            <p>Preencha os campos abaixo para gerar a mensagem de contratação</p>
+        </div>
+        
+        <div class="form-container">
+            <form id="contratoForm">
+                <div class="form-group">
+                    <label for="assistente">Nome do Assistente (quem está gerando)</label>
+                    <input type="text" id="assistente" placeholder="Seu nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="svcxd">SVC/XD</label>
+                    <input type="text" id="svcxd" placeholder="Ex: SBA1 - Salvador" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="motorista">Motorista</label>
+                    <input type="text" id="motorista" placeholder="Nome completo do motorista" required>
+                </div>
+                
+                <div class="grid">
+                    <div class="form-group">
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" placeholder="000.000.000-00" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tel">Telefone</label>
+                        <input type="text" id="tel" placeholder="71 9.8381-0904" required>
+                    </div>
+                </div>
+                
+                <div class="grid">
+                    <div class="form-group">
+                        <label for="perfil">Perfil do Veículo</label>
+                        <select id="perfil" required>
+                            <option value="">Selecione...</option>
+                            <option value="PASSEIO">PASSEIO</option>
+                            <option value="UTILITÁRIO">UTILITÁRIO</option>
+                            <option value="VAN">VAN</option>
+                            <option value="HR">HR</option>
+                            <option value="VUC">VUC</option>
+                            <option value="MÉDIO">MÉDIO</option>
+                            <option value="TOCO">TOCO</option>
+                            <option value="TRUCK">TRUCK</option>
+                            <option value="CARRETA">CARRETA</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="placa">Placa</label>
+                        <input type="text" id="placa" placeholder="DGI-1E74" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="exemplo@gmail.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="demanda">Demanda (ID)</label>
+                    <input type="text" id="demanda" placeholder="FF_16707 ou 35008" required>
+                </div>
+                
+                <div class="grid">
+                    <div class="form-group">
+                        <label for="cavalo">Cavalo <span class="optional">(opcional)</span></label>
+                        <input type="text" id="cavalo" placeholder="NYH-5961">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cluster">Cluster <span class="optional">(opcional)</span></label>
+                        <input type="text" id="cluster" placeholder="4">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="etc">ETC <span class="optional">(opcional)</span></label>
+                    <input type="text" id="etc" placeholder="3A+ Kangu">
+                </div>
+                
+                <div class="grid-3">
+                    <div class="form-group">
+                        <label for="frota">Frota</label>
+                        <select id="frota" required>
+                            <option value="">Selecione...</option>
+                            <option value="Fixa">Fixa</option>
+                            <option value="Spot">Spot</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="milha">Milha</label>
+                        <select id="milha" required>
+                            <option value="">Selecione...</option>
+                            <option value="First Mile">First Mile</option>
+                            <option value="Last Mile">Last Mile</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <select id="status" required>
+                            <option value="">Selecione...</option>
+                            <option value="Cadastro concluído no app">Cadastro concluído no app</option>
+                            <option value="Desistência">Desistência</option>
+                            <option value="Cadastro iniciado">Cadastro iniciado</option>
+                            <option value="Cadastro em tratativa">Cadastro em tratativa</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="obs">Observação <span class="optional">(opcional)</span></label>
+                    <textarea id="obs" rows="2" placeholder="Ex: Motorista aguardando contato."></textarea>
+                </div>
+                
+                <button type="submit" class="btn">✨ Gerar Mensagem</button>
+            </form>
+            
+            <div class="output-container" id="outputContainer">
+                <div class="output-header">
+                    <h3>📄 Mensagem Gerada:</h3>
+                    <div class="btn-group">
+                        <button class="copy-btn" id="copyBtn">📋 Copiar</button>
+                        <a class="whatsapp-btn" id="whatsappBtn" href="#" target="_blank">💬 WhatsApp</a>
+                        <button class="sheets-btn" id="sheetsBtn">📊 Salvar no Sheets</button>
+                    </div>
+                </div>
+                <div class="output-text" id="outputText"></div>
+                <div id="statusMessage" class="status-message"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Formulário oculto do Google Forms -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
+    <form id="googleForm" 
+          action="https://docs.google.com/forms/d/e/1FAIpQLSf8HNEi59tlP8n3OsxgzGorv29x02bsB9pTod6LIfDib-T5GA/formResponse" 
+          method="POST" 
+          target="hidden_iframe">
+        <input type="text" name="entry.473056928" id="formAssistente">
+        <input type="text" name="entry.680363877" id="formIdDemanda">
+        <input type="text" name="entry.282676985" id="formNome">
+        <input type="text" name="entry.158343860" id="formTelefone">
+        <input type="text" name="entry.825422823" id="formPlaca">
+        <input type="text" name="entry.1524407042" id="formCavalo">
+        <input type="text" name="entry.1492406883" id="formCpf">
+        <input type="text" name="entry.809352265" id="formCluster">
+        <input type="text" name="entry.507728727" id="formEtc">
+        <input type="text" name="entry.620086218" id="formPerfilVeiculo">
+        <input type="text" name="entry.427512297" id="formFrota">
+        <input type="text" name="entry.1993016572" id="formStatus">
+        <input type="text" name="entry.899990801" id="formMilha">
+    </form>
+    
+    <script>
+        let dadosContratacao = null;
+        let mensagemGerada = '';
+        
+        document.getElementById('contratoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Pegar os valores
+            const assistente = document.getElementById('assistente').value;
+            const svcxd = document.getElementById('svcxd').value;
+            const motorista = document.getElementById('motorista').value.toUpperCase();
+            const cpf = document.getElementById('cpf').value;
+            const tel = document.getElementById('tel').value;
+            const perfil = document.getElementById('perfil').value;
+            const placa = document.getElementById('placa').value;
+            const email = document.getElementById('email').value;
+            const demanda = document.getElementById('demanda').value;
+            const cavalo = document.getElementById('cavalo').value.trim() || '-';
+            const cluster = document.getElementById('cluster').value.trim() || '-';
+            const etc = document.getElementById('etc').value.trim() || '';
+            const frota = document.getElementById('frota').value;
+            const milha = document.getElementById('milha').value;
+            const status = document.getElementById('status').value;
+            const obs = document.getElementById('obs').value.trim();
+            
+            // Guardar dados para enviar ao Sheets
+            dadosContratacao = {
+                assistente: assistente,
+                idDemanda: demanda,
+                nome: motorista,
+                telefone: tel,
+                placa: placa,
+                cavalo: cavalo,
+                cpf: cpf,
+                cluster: cluster,
+                etc: etc,
+                perfilVeiculo: perfil,
+                frota: frota,
+                status: status,
+                milha: milha
+            };
+            
+            // Montar a mensagem
+            mensagemGerada = `CONTRATAÇÃO: ${svcxd}\n• Motorista: ${motorista}\n• CPF: ${cpf}\n• Tel: ${tel}\n• Perfil do Veiculo: ${perfil}\n• Placa: ${placa}\n• E-mail: ${email}\n• Demanda: ${demanda}`;
+            
+            // Adicionar campos opcionais apenas se preenchidos
+            if (cavalo !== '-') {
+                mensagemGerada += `\n• Cavalo: ${cavalo}`;
+            }
+            if (cluster !== '-') {
+                mensagemGerada += `\n• Cluster: ${cluster}`;
+            }
+            if (etc) {
+                mensagemGerada += `\n• ETC: ${etc}`;
+            }
+            
+            // Adicionar campos obrigatórios
+            mensagemGerada += `\n• Frota: ${frota}`;
+            mensagemGerada += `\n• Milha: ${milha}`;
+            mensagemGerada += `\n• Status: ${status}`;
+            
+            if (obs) {
+                mensagemGerada += `\n${obs} 📲`;
+            }
+            
+            // Mostrar resultado
+            document.getElementById('outputText').textContent = mensagemGerada;
+            document.getElementById('outputContainer').style.display = 'block';
+            
+            // Atualizar link do WhatsApp
+            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(mensagemGerada)}`;
+            document.getElementById('whatsappBtn').href = whatsappUrl;
+            
+            // Limpar mensagem de status anterior
+            document.getElementById('statusMessage').style.display = 'none';
+            
+            // Scroll suave até o resultado
+            document.getElementById('outputContainer').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+        
+        // Função de copiar
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            const texto = document.getElementById('outputText').textContent;
+            navigator.clipboard.writeText(texto).then(() => {
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copiado!';
+                btn.classList.add('copied');
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        });
+        
+        // Função salvar no Google Sheets via Google Forms
+        document.getElementById('sheetsBtn').addEventListener('click', function() {
+            const btn = this;
+            
+            if (!dadosContratacao) {
+                mostrarStatus('Erro: Gere a mensagem primeiro!', 'error');
+                return;
+            }
+            
+            btn.disabled = true;
+            btn.textContent = '⏳ Salvando...';
+            
+            // Preencher o formulário do Google
+            document.getElementById('formAssistente').value = dadosContratacao.assistente;
+            document.getElementById('formIdDemanda').value = dadosContratacao.idDemanda;
+            document.getElementById('formNome').value = dadosContratacao.nome;
+            document.getElementById('formTelefone').value = dadosContratacao.telefone;
+            document.getElementById('formPlaca').value = dadosContratacao.placa;
+            document.getElementById('formCavalo').value = dadosContratacao.cavalo;
+            document.getElementById('formCpf').value = dadosContratacao.cpf;
+            document.getElementById('formCluster').value = dadosContratacao.cluster;
+            document.getElementById('formEtc').value = dadosContratacao.etc;
+            document.getElementById('formPerfilVeiculo').value = dadosContratacao.perfilVeiculo;
+            document.getElementById('formFrota').value = dadosContratacao.frota;
+            document.getElementById('formStatus').value = dadosContratacao.status;
+            document.getElementById('formMilha').value = dadosContratacao.milha;
+            
+            // Enviar o formulário
+            document.getElementById('googleForm').submit();
+            
+            // Feedback de sucesso
+            setTimeout(() => {
+                mostrarStatus('✅ Dados salvos na planilha com sucesso!', 'success');
+                btn.textContent = '✅ Salvo!';
+                
+                setTimeout(() => {
+                    btn.textContent = '📊 Salvar no Sheets';
+                    btn.disabled = false;
+                }, 2000);
+            }, 1500);
+        });
+        
+        function mostrarStatus(mensagem, tipo) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.className = `status-message alert alert-${tipo}`;
+            statusDiv.textContent = mensagem;
+            statusDiv.style.display = 'block';
+        }
+        
+        // Auto-formatação de CPF
+        document.getElementById('cpf').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                e.target.value = value;
+            }
+        });
+    </script>
+</body>
+</html>
