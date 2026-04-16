@@ -366,15 +366,20 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="status">Status</label>
-                        <select id="status" required>
-                            <option value="">Selecione...</option>
-                            <option value="Cadastro concluído no app">Cadastro concluído no app</option>
-                            <option value="Desistência">Desistência</option>
-                            <option value="Cadastro iniciado">Cadastro iniciado</option>
-                            <option value="Cadastro em tratativa">Cadastro em tratativa</option>
-                        </select>
+                        <label for="userId">User ID <span class="optional">(opcional)</span></label>
+                        <input type="text" id="userId" placeholder="123456">
                     </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">Status</label>
+                    <select id="status" required>
+                        <option value="">Selecione...</option>
+                        <option value="Cadastro concluído no app">Cadastro concluído no app</option>
+                        <option value="Desistência">Desistência</option>
+                        <option value="Cadastro iniciado">Cadastro iniciado</option>
+                        <option value="Cadastro em tratativa">Cadastro em tratativa</option>
+                    </select>
                 </div>
                 
                 <div class="form-group">
@@ -419,6 +424,7 @@
         <input type="text" name="entry.427512297" id="formFrota">
         <input type="text" name="entry.1993016572" id="formStatus">
         <input type="text" name="entry.899990801" id="formMilha">
+        <input type="text" name="entry.238083866" id="formUserId">
     </form>
     
     <script>
@@ -443,6 +449,7 @@
             const etc = document.getElementById('etc').value.trim() || '';
             const frota = document.getElementById('frota').value;
             const milha = document.getElementById('milha').value;
+            const userId = document.getElementById('userId').value.trim() || '';
             const status = document.getElementById('status').value;
             const obs = document.getElementById('obs').value.trim();
             
@@ -460,7 +467,8 @@
                 perfilVeiculo: perfil,
                 frota: frota,
                 status: status,
-                milha: milha
+                milha: milha,
+                userId: userId
             };
             
             // Montar a mensagem
@@ -543,6 +551,7 @@
             document.getElementById('formFrota').value = dadosContratacao.frota;
             document.getElementById('formStatus').value = dadosContratacao.status;
             document.getElementById('formMilha').value = dadosContratacao.milha;
+            document.getElementById('formUserId').value = dadosContratacao.userId;
             
             // Enviar o formulário
             document.getElementById('googleForm').submit();
