@@ -450,7 +450,7 @@
             const etc = document.getElementById('etc').value.trim() || '';
             const frota = document.getElementById('frota').value;
             const milha = document.getElementById('milha').value;
-            const userId = document.getElementById('userId').value.trim() || '';
+            const userId = document.getElementById('userId').value.trim();
             const status = document.getElementById('status').value;
             const obs = document.getElementById('obs').value.trim();
             
@@ -489,6 +489,12 @@
             // Adicionar campos obrigatórios
             mensagemGerada += `\n• Frota: ${frota}`;
             mensagemGerada += `\n• Milha: ${milha}`;
+            
+            // Adicionar User ID se preenchido
+            if (userId) {
+                mensagemGerada += `\n• User ID: ${userId}`;
+            }
+            
             mensagemGerada += `\n• Status: ${status}`;
             
             if (obs) {
