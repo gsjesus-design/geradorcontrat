@@ -443,6 +443,7 @@
         <input type="text" name="entry.1993016572" id="formStatus">
         <input type="text" name="entry.899990801" id="formMilha">
         <input type="text" name="entry.238083866" id="formUserId">
+        <input type="text" name="entry.1548588405" id="formEmail">
     </form>
     
     <script>
@@ -486,7 +487,8 @@
                 frota: frota,
                 status: status,
                 milha: milha,
-                userId: userId
+                userId: userId,
+                email: email
             };
             
             // Montar a mensagem
@@ -576,6 +578,7 @@
             document.getElementById('formStatus').value = dadosContratacao.status;
             document.getElementById('formMilha').value = dadosContratacao.milha;
             document.getElementById('formUserId').value = dadosContratacao.userId;
+            document.getElementById('formEmail').value = dadosContratacao.email;
             
             // Enviar o formulário
             document.getElementById('googleForm').submit();
