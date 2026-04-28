@@ -434,22 +434,22 @@
           action="https://docs.google.com/forms/d/e/1FAIpQLSf8HNEi59tlP8n3OsxgzGorv29x02bsB9pTod6LIfDib-T5GA/formResponse" 
           method="POST" 
           target="hidden_iframe">
-        <input type="text" name="entry.45197638" id="formAssistente">
-        <input type="text" name="entry.473056928" id="formIdDemanda">
-        <input type="text" name="entry.680363877" id="formNome">
-        <input type="text" name="entry.282676985" id="formTelefone">
-        <input type="text" name="entry.158343860" id="formPlaca">
-        <input type="text" name="entry.825422823" id="formCavalo">
-        <input type="text" name="entry.1524407042" id="formCpf">
-        <input type="text" name="entry.1492406883" id="formCluster">
-        <input type="text" name="entry.809352265" id="formEtc">
-        <input type="text" name="entry.507728727" id="formPerfilVeiculo">
-        <input type="text" name="entry.620086218" id="formFrota">
-        <input type="text" name="entry.427512297" id="formStatus">
-        <input type="text" name="entry.1993016572" id="formMilha">
-        <input type="text" name="entry.899990801" id="formUserId">
-        <input type="text" name="entry.238083866" id="formEmail">
-        <input type="text" name="entry.1548588405" id="formTitularAntt">
+        <input type="text" name="entry.473056928" id="formAssistente">
+        <input type="text" name="entry.680363877" id="formIdDemanda">
+        <input type="text" name="entry.282676985" id="formNome">
+        <input type="text" name="entry.158343860" id="formTelefone">
+        <input type="text" name="entry.825422823" id="formPlaca">
+        <input type="text" name="entry.1524407042" id="formCavalo">
+        <input type="text" name="entry.1492406883" id="formCpf">
+        <input type="text" name="entry.809352265" id="formCluster">
+        <input type="text" name="entry.507728727" id="formEtc">
+        <input type="text" name="entry.620086218" id="formPerfilVeiculo">
+        <input type="text" name="entry.427512297" id="formFrota">
+        <input type="text" name="entry.1993016572" id="formStatus">
+        <input type="text" name="entry.899990801" id="formMilha">
+        <input type="text" name="entry.238083866" id="formUserId">
+        <input type="text" name="entry.1548588405" id="formEmail">
+        <input type="text" name="entry.45197638" id="formTitularAntt">
     </form>
     
     <script>
@@ -479,7 +479,7 @@
             const status = document.getElementById('status').value;
             const obs = document.getElementById('obs').value.trim();
             
-            // Guardar dados para enviar ao Sheets
+            // Guardar dados para enviar ao Sheets (ordem correta)
             dadosContratacao = {
                 assistente: assistente,
                 idDemanda: demanda,
@@ -571,7 +571,7 @@
             btn.disabled = true;
             btn.textContent = '⏳ Salvando...';
             
-            // Preencher o formulário do Google
+            // Preencher o formulário do Google (ordem correta)
             document.getElementById('formAssistente').value = dadosContratacao.assistente;
             document.getElementById('formIdDemanda').value = dadosContratacao.idDemanda;
             document.getElementById('formNome').value = dadosContratacao.nome;
@@ -624,4 +624,3 @@
     </script>
 </body>
 </html>
- 
