@@ -436,8 +436,8 @@
         <input type="text" name="entry.124597455" id="formEtc">
         <input type="text" name="entry.1795315425" id="formPerfilVeiculo">
         <input type="text" name="entry.113313044" id="formFrota">
-        <input type="text" name="entry.1745259130" id="formMilha">
         <input type="text" name="entry.497551426" id="formStatus">
+        <input type="text" name="entry.1745259130" id="formMilha">
         <input type="text" name="entry.1013682616" id="formEmail">
         <input type="text" name="entry.641402012" id="formTitularAntt">
     </form>
@@ -468,7 +468,7 @@
             const status = document.getElementById('status').value;
             const obs = document.getElementById('obs').value.trim();
             
-            // Guardar dados para enviar ao Sheets
+            // Guardar dados para enviar ao Sheets (ordem correta)
             dadosContratacao = {
                 assistente: assistente,
                 idDemanda: demanda,
@@ -481,8 +481,8 @@
                 etc: etc,
                 perfilVeiculo: perfil,
                 frota: frota,
-                milha: milha,
                 status: status,
+                milha: milha,
                 email: email,
                 titularAntt: titularAntt
             };
@@ -553,7 +553,7 @@
             btn.disabled = true;
             btn.textContent = '⏳ Salvando...';
             
-            // Preencher o formulário do Google
+            // Preencher o formulário do Google (ordem correta)
             document.getElementById('formAssistente').value = dadosContratacao.assistente;
             document.getElementById('formIdDemanda').value = dadosContratacao.idDemanda;
             document.getElementById('formNome').value = dadosContratacao.nome;
@@ -565,8 +565,8 @@
             document.getElementById('formEtc').value = dadosContratacao.etc;
             document.getElementById('formPerfilVeiculo').value = dadosContratacao.perfilVeiculo;
             document.getElementById('formFrota').value = dadosContratacao.frota;
-            document.getElementById('formMilha').value = dadosContratacao.milha;
             document.getElementById('formStatus').value = dadosContratacao.status;
+            document.getElementById('formMilha').value = dadosContratacao.milha;
             document.getElementById('formEmail').value = dadosContratacao.email;
             document.getElementById('formTitularAntt').value = dadosContratacao.titularAntt;
             
@@ -605,4 +605,3 @@
     </script>
 </body>
 </html>
- 
