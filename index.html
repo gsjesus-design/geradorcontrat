@@ -342,6 +342,11 @@
                 </div>
                 
                 <div class="form-group">
+                    <label for="titularAntt">Titular ANTT</label>
+                    <input type="text" id="titularAntt" placeholder="Nome do titular ANTT" required>
+                </div>
+                
+                <div class="form-group">
                     <label for="demanda">Demanda (ID)</label>
                     <input type="text" id="demanda" placeholder="FF_16707 ou 35008" required>
                 </div>
@@ -434,6 +439,7 @@
         <input type="text" name="entry.497551426" id="formMilha">
         <input type="text" name="entry.1013682616" id="formStatus">
         <input type="text" name="entry.641402012" id="formEmail">
+        <input type="text" name="entry.1684757966" id="formTitularAntt">
     </form>
     
     <script>
@@ -452,6 +458,7 @@
             const perfil = document.getElementById('perfil').value;
             const placa = document.getElementById('placa').value;
             const email = document.getElementById('email').value;
+            const titularAntt = document.getElementById('titularAntt').value.toUpperCase();
             const demanda = document.getElementById('demanda').value;
             const cavalo = document.getElementById('cavalo').value.trim() || '-';
             const cluster = document.getElementById('cluster').value.trim() || '-';
@@ -476,11 +483,12 @@
                 frota: frota,
                 milha: milha,
                 status: status,
-                email: email
+                email: email,
+                titularAntt: titularAntt
             };
             
             // Montar a mensagem
-            mensagemGerada = `CONTRATAÇÃO: ${svcxd}\n• Motorista: ${motorista}\n• CPF: ${cpf}\n• Tel: ${tel}\n• Perfil do Veiculo: ${perfil}\n• Placa: ${placa}\n• E-mail: ${email}\n• Demanda: ${demanda}`;
+            mensagemGerada = `CONTRATAÇÃO: ${svcxd}\n• Motorista: ${motorista}\n• CPF: ${cpf}\n• Tel: ${tel}\n• Perfil do Veiculo: ${perfil}\n• Placa: ${placa}\n• E-mail: ${email}\n• Titular ANTT: ${titularAntt}\n• Demanda: ${demanda}`;
             
             // Adicionar campos opcionais apenas se preenchidos
             if (cavalo !== '-') {
@@ -560,6 +568,7 @@
             document.getElementById('formMilha').value = dadosContratacao.milha;
             document.getElementById('formStatus').value = dadosContratacao.status;
             document.getElementById('formEmail').value = dadosContratacao.email;
+            document.getElementById('formTitularAntt').value = dadosContratacao.titularAntt;
             
             // Enviar o formulário
             document.getElementById('googleForm').submit();
