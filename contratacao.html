@@ -228,7 +228,6 @@
         </div>
     </div>
 
-    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
     <form id="googleForm" 
           action="https://docs.google.com/forms/d/e/1FAIpQLSf8HNEi59tlP8n3OsxgzGorv29x02bsB9pTod6LIfDib-T5GA/formResponse" 
           method="POST" 
@@ -437,13 +436,53 @@
             document.getElementById('formTitularAntt').value = d.titularAntt;
             document.getElementById('formCnpjAntt').value = d.cnpjAntt;
             document.getElementById('formLinkInfobip').value = d.linkInfobip;
-            document.getElementById('googleForm').submit();
+            submitToGoogleForms(d);
             setTimeout(() => {
                 jaSalvou = true;
                 mostrarStatus('✅ Dados salvos na planilha com sucesso!', 'success');
                 btn.textContent = '✅ Salvo!';
             }, 1500);
         });
+
+        function submitToGoogleForms(d) {
+            const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSf8HNEi59tlP8n3OsxgzGorv29x02bsB9pTod6LIfDib-T5GA/formResponse';
+            const params = new URLSearchParams({
+                'entry.473056928': d.assistente,
+                'entry.680363877': d.idDemanda,
+                'entry.282676985': d.nome,
+                'entry.158343860': d.telefone,
+                'entry.825422823': d.placa,
+                'entry.1524407042': d.cavalo,
+                'entry.1492406883': d.cpf,
+                'entry.809352265': d.cluster,
+                'entry.507728727': d.etc,
+                'entry.620086218': d.perfilVeiculo,
+                'entry.427512297': d.frota,
+                'entry.1993016572': d.status,
+                'entry.899990801': d.milha,
+                'entry.238083866': d.userId || '',
+                'entry.1548588405': d.email,
+                'entry.45197638': d.titularAntt,
+                'entry.864262651': d.cnpjAntt || '',
+                'entry.291121062': d.linkInfobip || ''
+            });
+            fetch(formUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: params.toString()
+            }).then(() => {
+                const btn = document.getElementById('sheetsBtn');
+                jaSalvou = true;
+                mostrarStatus('✅ Dados salvos na planilha com sucesso!', 'success');
+                btn.textContent = '✅ Salvo!';
+            }).catch(() => {
+                const btn = document.getElementById('sheetsBtn');
+                btn.disabled = false;
+                btn.textContent = '📊 Salvar no Sheets';
+                mostrarStatus('❌ Erro ao salvar. Tente novamente.', 'error');
+            });
+        }
 
         function mostrarStatus(mensagem, tipo) {
             const s = document.getElementById('statusMessage');
