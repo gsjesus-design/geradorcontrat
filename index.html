@@ -5,19 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador Oferta - Pescadores</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2D3277 0%, #1a1f5e 100%);
             padding: 20px;
             min-height: 100vh;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -26,32 +22,21 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             overflow: hidden;
         }
-        
+
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2D3277 0%, #1a1f5e 100%);
             color: white;
             padding: 30px;
             text-align: center;
         }
-        
-        .header h1 {
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
-        
-        .header p {
-            font-size: 14px;
-            opacity: 0.9;
-        }
-        
-        .form-container {
-            padding: 30px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
+
+        .header h1 { font-size: 24px; margin-bottom: 5px; color: #FFE600; }
+        .header p { font-size: 14px; opacity: 0.9; }
+
+        .form-container { padding: 30px; }
+
+        .form-group { margin-bottom: 20px; }
+
         label {
             display: block;
             font-weight: 600;
@@ -59,13 +44,9 @@
             color: #333;
             font-size: 14px;
         }
-        
-        .optional {
-            color: #999;
-            font-weight: 400;
-            font-size: 12px;
-        }
-        
+
+        .optional { color: #999; font-weight: 400; font-size: 12px; }
+
         input, textarea, select {
             width: 100%;
             padding: 12px;
@@ -75,21 +56,28 @@
             transition: border-color 0.3s;
             font-family: inherit;
         }
-        
-        select {
-            cursor: pointer;
-            background-color: white;
-        }
-        
+
+        select { cursor: pointer; background-color: white; }
+
         input:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #FFE600;
         }
-        
+
+        input.error { border-color: #dc3545; }
+        input.success { border-color: #28a745; }
+
+        .field-error {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
+        }
+
         .btn {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2D3277 0%, #1a1f5e 100%);
             color: white;
             border: none;
             border-radius: 8px;
@@ -98,22 +86,11 @@
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
         }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
-        
-        .btn:active {
-            transform: translateY(0);
-        }
-        
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
+
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102,126,234,0.4); }
+        .btn:active { transform: translateY(0); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
         .output-container {
             margin-top: 30px;
             padding: 20px;
@@ -121,25 +98,18 @@
             border-radius: 8px;
             display: none;
         }
-        
+
         .output-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
         }
-        
-        .output-header h3 {
-            color: #333;
-            font-size: 16px;
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
+
+        .output-header h3 { color: #333; font-size: 16px; }
+
+        .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
+
         .copy-btn, .whatsapp-btn, .sheets-btn {
             padding: 8px 16px;
             color: white;
@@ -150,42 +120,18 @@
             transition: background 0.3s;
             white-space: nowrap;
         }
-        
-        .copy-btn {
-            background: #28a745;
-        }
-        
-        .copy-btn:hover {
-            background: #218838;
-        }
-        
-        .copy-btn.copied {
-            background: #6c757d;
-        }
-        
-        .whatsapp-btn {
-            background: #25D366;
-            text-decoration: none;
-            display: inline-block;
-        }
-        
-        .whatsapp-btn:hover {
-            background: #128C7E;
-        }
-        
-        .sheets-btn {
-            background: #0F9D58;
-        }
-        
-        .sheets-btn:hover {
-            background: #0d7d47;
-        }
-        
-        .sheets-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        
+
+        .copy-btn { background: #28a745; }
+        .copy-btn:hover { background: #218838; }
+        .copy-btn.copied { background: #6c757d; }
+
+        .whatsapp-btn { background: #25D366; text-decoration: none; display: inline-block; }
+        .whatsapp-btn:hover { background: #128C7E; }
+
+        .sheets-btn { background: #2D3277; }
+        .sheets-btn:hover { background: #1a1f5e; }
+        .sheets-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
         .output-text {
             background: white;
             padding: 20px;
@@ -197,66 +143,121 @@
             border: 2px solid #e0e0e0;
             color: #333;
         }
-        
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-        
-        .grid-3 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-        }
-        
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
         .alert {
             padding: 12px;
             border-radius: 6px;
             margin-bottom: 20px;
             font-size: 14px;
         }
-        
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .status-message {
+
+        .alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+        .status-message { display: none; margin-top: 10px; }
+
+        #googleForm { display: none; }
+
+        /* Autocomplete */
+        .autocomplete-wrapper { position: relative; }
+
+        .autocomplete-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #FFE600;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
             display: none;
-            margin-top: 10px;
         }
-        
-        #googleForm {
+
+        .autocomplete-item {
+            padding: 10px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .autocomplete-item:hover { background: #fffbe6; }
+        .autocomplete-item:last-child { border-bottom: none; }
+
+        /* Modal de confirmação */
+        .modal-overlay {
             display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
         }
-        
+
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal h3 { margin-bottom: 20px; color: #333; font-size: 18px; }
+
+        .modal-data { background: #f8f9fa; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
+
+        .modal-data p {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        .modal-data strong { color: #333; }
+
+        .modal-buttons { display: flex; gap: 10px; }
+
+        .modal-confirm {
+            flex: 1;
+            padding: 12px;
+            background: linear-gradient(135deg, #2D3277 0%, #1a1f5e 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .modal-cancel {
+            flex: 1;
+            padding: 12px;
+            background: #e0e0e0;
+            color: #555;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ANTT condicional */
+        #cnpjGroup { display: none; }
+
         @media (max-width: 768px) {
-            .grid, .grid-3 {
-                grid-template-columns: 1fr;
-            }
-            
-            .btn-group {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .output-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .copy-btn, .whatsapp-btn, .sheets-btn {
-                width: 100%;
-            }
+            .grid, .grid-3 { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; width: 100%; }
+            .output-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .copy-btn, .whatsapp-btn, .sheets-btn { width: 100%; }
         }
     </style>
 </head>
@@ -264,13 +265,14 @@
     <div class="container">
         <div class="header">
             <h1>🎣 Gerador Oferta - Pescadores</h1>
-            <p>Preencha os campos abaixo para gerar a mensagem de contratação</p>
+            <p>Preencha os campos abaixo para gerar a mensagem de oferta</p>
         </div>
-        
+
         <div class="form-container">
-            <form id="contratoForm">
+            <form id="contratoForm" novalidate>
+
                 <div class="form-group">
-                    <label for="assistente">Nome do Assistente (quem está gerando)</label>
+                    <label for="assistente">Nome do Assistente</label>
                     <select id="assistente" required>
                         <option value="">Selecione...</option>
                         <option value="Carlos">Carlos</option>
@@ -292,30 +294,37 @@
                         <option value="Vinny">Vinny</option>
                         <option value="Vitor">Vitor</option>
                     </select>
+                    <div class="field-error" id="err-assistente">Selecione o assistente.</div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="svcxd">SVC/XD</label>
-                    <input type="text" id="svcxd" placeholder="Ex: SBA1 - Salvador" required>
+                    <div class="autocomplete-wrapper">
+                        <input type="text" id="svcxd" placeholder="Digite para buscar o SVC/XD..." required autocomplete="off">
+                        <div class="autocomplete-list" id="svcxdList"></div>
+                    </div>
+                    <div class="field-error" id="err-svcxd">Preencha o SVC/XD.</div>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="motorista">Motorista</label>
+                    <label for="motorista">Nome do Motorista</label>
                     <input type="text" id="motorista" placeholder="Nome completo do motorista" required>
+                    <div class="field-error" id="err-motorista">Preencha o nome do motorista (somente letras).</div>
                 </div>
-                
+
                 <div class="grid">
                     <div class="form-group">
                         <label for="cpf">CPF</label>
-                        <input type="text" id="cpf" placeholder="000.000.000-00" required>
+                        <input type="text" id="cpf" placeholder="000.000.000-00" required maxlength="14">
+                        <div class="field-error" id="err-cpf">CPF inválido.</div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="tel">Telefone</label>
                         <input type="text" id="tel" placeholder="71 9.8381-0904" required>
+                        <div class="field-error" id="err-tel">Preencha o telefone.</div>
                     </div>
                 </div>
-                
+
                 <div class="grid">
                     <div class="form-group">
                         <label for="perfil">Perfil do Veículo</label>
@@ -331,46 +340,65 @@
                             <option value="TRUCK">TRUCK</option>
                             <option value="CARRETA">CARRETA</option>
                         </select>
+                        <div class="field-error" id="err-perfil">Selecione o perfil do veículo.</div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="placa">Placa</label>
-                        <input type="text" id="placa" placeholder="DGI-1E74" required>
+                        <input type="text" id="placa" placeholder="DGI-1E74" required maxlength="8">
+                        <div class="field-error" id="err-placa">Preencha a placa.</div>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" placeholder="exemplo@gmail.com" required>
+                    <div class="field-error" id="err-email">E-mail inválido.</div>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="titularAntt">Titular ANTT</label>
-                    <input type="text" id="titularAntt" placeholder="Nome do titular ANTT" required>
+                    <label for="tipoAntt">Titular ANTT</label>
+                    <select id="tipoAntt" required>
+                        <option value="">Selecione o tipo...</option>
+                        <option value="PF">Pessoa Física</option>
+                        <option value="PJ">Pessoa Jurídica</option>
+                    </select>
+                    <div class="field-error" id="err-tipoAntt">Selecione o tipo de ANTT.</div>
                 </div>
-                
+
+                <div class="form-group">
+                    <label for="titularAntt">Nome do Titular ANTT</label>
+                    <input type="text" id="titularAntt" placeholder="Nome do titular ANTT" required>
+                    <div class="field-error" id="err-titularAntt">Preencha o titular ANTT.</div>
+                </div>
+
+                <div class="form-group" id="cnpjGroup">
+                    <label for="cnpjAntt">CNPJ da ANTT</label>
+                    <input type="text" id="cnpjAntt" placeholder="00.000.000/0000-00" maxlength="18">
+                    <div class="field-error" id="err-cnpjAntt">CNPJ inválido.</div>
+                </div>
+
                 <div class="form-group">
                     <label for="demanda">Demanda (ID)</label>
                     <input type="text" id="demanda" placeholder="FF_16707 ou 35008" required>
+                    <div class="field-error" id="err-demanda">Formato inválido. Use FF_XXXXX ou somente números.</div>
                 </div>
-                
+
                 <div class="grid">
                     <div class="form-group">
                         <label for="cavalo">Cavalo <span class="optional">(opcional)</span></label>
                         <input type="text" id="cavalo" placeholder="NYH-5961">
                     </div>
-                    
                     <div class="form-group">
                         <label for="cluster">Cluster <span class="optional">(opcional)</span></label>
-                        <input type="text" id="cluster" placeholder="4">
+                        <input type="text" id="cluster" placeholder="4 ou 6.1">
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="etc">ETC <span class="optional">(opcional)</span></label>
                     <input type="text" id="etc" placeholder="3A+ Kangu">
                 </div>
-                
+
                 <div class="grid-3">
                     <div class="form-group">
                         <label for="frota">Frota</label>
@@ -379,8 +407,8 @@
                             <option value="Fixa">Fixa</option>
                             <option value="Spot">Spot</option>
                         </select>
+                        <div class="field-error" id="err-frota">Selecione a frota.</div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="milha">Milha</label>
                         <select id="milha" required>
@@ -388,25 +416,31 @@
                             <option value="First Mile">First Mile</option>
                             <option value="Last Mile">Last Mile</option>
                         </select>
+                        <div class="field-error" id="err-milha">Selecione a milha.</div>
                     </div>
-                    
                     <div class="form-group">
                         <label for="status">Status</label>
                         <select id="status" required>
                             <option value="">Selecione...</option>
                             <option value="Enviado para cadastro">Enviado para cadastro</option>
                         </select>
+                        <div class="field-error" id="err-status">Selecione o status.</div>
                     </div>
                 </div>
-                
+
+                <div class="form-group">
+                    <label for="linkInfobip">Link Infobip <span class="optional">(opcional)</span></label>
+                    <input type="url" id="linkInfobip" placeholder="https://...">
+                </div>
+
                 <div class="form-group">
                     <label for="obs">Observação <span class="optional">(opcional)</span></label>
                     <textarea id="obs" rows="2" placeholder="Ex: Motorista aguardando contato."></textarea>
                 </div>
-                
+
                 <button type="submit" class="btn">✨ Gerar Mensagem</button>
             </form>
-            
+
             <div class="output-container" id="outputContainer">
                 <div class="output-header">
                     <h3>📄 Mensagem Gerada:</h3>
@@ -421,190 +455,381 @@
             </div>
         </div>
     </div>
-    
-    <!-- Formulário oculto do Google Forms -->
+
+    <!-- Modal de confirmação -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <h3>✅ Confirmar envio para o Sheets</h3>
+            <div class="modal-data" id="modalData"></div>
+            <div class="modal-buttons">
+                <button class="modal-cancel" id="modalCancel">✏️ Corrigir</button>
+                <button class="modal-confirm" id="modalConfirm">📊 Confirmar e Salvar</button>
+            </div>
+        </div>
+    </div>
+
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-    <form id="googleForm" 
-          action="https://docs.google.com/forms/d/e/1FAIpQLSe2ScRRGX_Jw3RV7tDujtEmJVGgtjFMFsMPrZh97-ef_nF8cA/formResponse" 
-          method="POST" 
+    <form id="googleForm"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSe2ScRRGX_Jw3RV7tDujtEmJVGgtjFMFsMPrZh97-ef_nF8cA/formResponse"
+          method="POST"
           target="hidden_iframe">
-        <input type="text" name="entry.454911318" id="formAssistente">
-        <input type="text" name="entry.1515528311" id="formIdDemanda">
-        <input type="text" name="entry.1126844815" id="formNome">
-        <input type="text" name="entry.1790649853" id="formTelefone">
-        <input type="text" name="entry.1336996413" id="formPlaca">
-        <input type="text" name="entry.1480553123" id="formCavalo">
-        <input type="text" name="entry.251109345" id="formCpf">
-        <input type="text" name="entry.124597455" id="formCluster">
-        <input type="text" name="entry.1795315425" id="formEtc">
-        <input type="text" name="entry.113313044" id="formPerfilVeiculo">
-        <input type="text" name="entry.1745259130" id="formFrota">
-        <input type="text" name="entry.497551426" id="formStatus">
-        <input type="text" name="entry.1013682616" id="formMilha">
-        <input type="text" name="entry.641402012" id="formEmail">
-        <input type="text" name="entry.1684757966" id="formTitularAntt">
+        <input type="hidden" name="entry.454911318" id="formAssistente">
+        <input type="hidden" name="entry.1515528311" id="formIdDemanda">
+        <input type="hidden" name="entry.1126844815" id="formNome">
+        <input type="hidden" name="entry.1790649853" id="formTelefone">
+        <input type="hidden" name="entry.1336996413" id="formPlaca">
+        <input type="hidden" name="entry.1480553123" id="formCavalo">
+        <input type="hidden" name="entry.251109345" id="formCpf">
+        <input type="hidden" name="entry.124597455" id="formCluster">
+        <input type="hidden" name="entry.1795315425" id="formEtc">
+        <input type="hidden" name="entry.113313044" id="formPerfilVeiculo">
+        <input type="hidden" name="entry.1745259130" id="formFrota">
+        <input type="hidden" name="entry.497551426" id="formStatus">
+        <input type="hidden" name="entry.1013682616" id="formMilha">
+        <input type="hidden" name="entry.641402012" id="formEmail">
+        <input type="hidden" name="entry.1684757966" id="formTitularAntt">
+        <input type="hidden" name="entry.1921164705" id="formCnpjAntt">
+        <input type="hidden" name="entry.302002447" id="formLinkInfobip">
     </form>
-    
+
     <script>
-        let dadosContratacao = null;
-        let mensagemGerada = '';
-        
+        // ── Lista SVC/XD ────────────────────────────────────────────────────
+        const svcxdOptions = [
+            "BRXRS1 - RS", "SSP5 - ARE", "SSP45 - Itaquera", "BRXSP6 - GRU I",
+            "BRXSP2 - CPS", "SSP28 - Jales", "BRXSP4 - SBC", "BRXSP10 - GRU II",
+            "BRXSP1 - ARE", "BRXSP7 - BAU", "BRXSP5 - RAO", "BRXSC2 - SC",
+            "SMG14 - Nova Lima", "SSP14 - BAU", "SMG8 - Vespasiano", "SRS8 - Sapucaia do Sul",
+            "SPR8 - Campina Grande do Sul", "SRS1 - Porto Alegre", "SSP29 - Mogi Mirim",
+            "SSP30 - GRU", "SSP4 - Ribeirão Preto", "BRRC01 - Perus", "BRXSP14 - MAR",
+            "SSP27 - Itapetininga", "SSP18 - Jundiaí", "SPR6 - Maringá", "SSP1 - ZS",
+            "SSP3 - CPS", "SSP8 - SJC", "SSP9 - Limeira", "SPR2 - Londrina",
+            "SES1 - Vitória", "SSP11 - PRU", "SSP17 - SBC", "XPR1 - CWB",
+            "BRXES1 - ES", "SSP36 - Piracicaba", "BRXRJ1 - RJ", "SSP38 - Itupeva",
+            "SSP40 - ZN", "BRXMG1 - MG", "BRXSP11 - PRU", "SSP24 - Avaré",
+            "SSP7 - ZO", "SSP12 - SJRP", "SSP31 - Barretos", "BRRC02 - Sumaré",
+            "SSP22 - São Carlos", "BRSP11 - PRU", "SSP13 - MAR", "Hibrido",
+            "SSP10 - Araçatuba", "SSP26 - Franca", "SSC1 - Joinville", "SSC2 - Florianópolis",
+            "SBA1 - Salvador", "SGO1 - Goiânia", "SMG10 - Divinópolis", "SMG3 - Pouso Alegre",
+            "SSP15 - Santos", "SSP21 - Mooca", "SMG1 - Contagem", "SSP20 - Sorocaba",
+            "SBA2 - Feira de Santana", "SDF1 - Brasília", "SPR1 - Curitiba",
+            "SBA3 - Vitória da Conquista", "SMG6 - Uberlândia", "SDF2 - Brasília 2",
+            "SRS10 - Lajeado", "SMG11 - Patos de Minas", "SPR3 - Cascavel", "SSP34 - Cotia",
+            "SPR5 - Guarapuava", "SRS4 - Caxias do Sul", "SSC3 - Gaspar", "SMG9 - Varginha",
+            "SMG2 - Juiz de Fora", "SMG15 - Contagem", "SPR7 - Ponta Grossa",
+            "SSP23 - Mogi das Cruzes", "SSP6 - ZL", "-", "SSC8 - Itajaí",
+            "SPE1 - Recife", "BRXSD1 - XDSD SP", "SCE1 - Fortaleza", "SBA6 - Salvador",
+            "SSE1 - Aracaju", "SRJ3 - Volta Redonda", "SMN1 - São Luís", "STO1 - Palmas",
+            "SJP1 - João Pessoa", "SMR1 - Cuiabá", "SSC4 - Chapecó", "SAL1 - Maceió",
+            "SPI1 - Teresina", "SRN1 - Natal", "SPA1 - Belém",
+            "SSC9 - Governador Celso Ramos", "BRXMG3 - Pouso Alegre", "ZN - Zona Norte",
+            "BRSP06 - Araçariguama", "BRMG02 - Betim", "BRSC02 - Governador Celso Ramos",
+            "SRS2 - Pelotas", "SSP48 - Jaguaré", "SSP49 - Zona Norte", "SRS9 - Santa Rita",
+            "SSP25 - Atibaia", "BRSP11 - Guarulhos", "Full SSP11 - PRU", "Full SSP12 - SJRP",
+            "Full SSP22 - São Carlos", "SRJ10 - RJ Barra", "BRRJ02 - São João de Meriti",
+            "BRXGO1 - Goiânia", "SRJ1 - Cordovil", "Full SES1 - Vitória", "SRJ2 - Queimados",
+            "SRJ8 - Niterói", "SSP46 - Santos 2", "SSP16 - Caraguatatuba", "SRJ5 - Petrópolis",
+            "BRXPR4 - Maringá", "SGO3 - Hidrolândia", "SRJ1 - Rio de Janeiro",
+            "BRXSP18 - Santo André", "BRXPR3 - Cascavel", "BRXPR2 - Londrina",
+            "BRXPE1 - Jaboatão dos Guararapes", "BRXMG2 - Uberlândia",
+            "BRXBA1 - Simões Filho", "BRXCE1 - Itaitinga"
+        ];
+
+        // Autocomplete SVC/XD
+        const svcxdInput = document.getElementById('svcxd');
+        const svcxdList = document.getElementById('svcxdList');
+
+        svcxdInput.addEventListener('input', function() {
+            const val = this.value.toLowerCase();
+            svcxdList.innerHTML = '';
+            if (!val) { svcxdList.style.display = 'none'; return; }
+            const filtered = svcxdOptions.filter(o => o.toLowerCase().includes(val));
+            if (filtered.length === 0) { svcxdList.style.display = 'none'; return; }
+            filtered.forEach(opt => {
+                const item = document.createElement('div');
+                item.className = 'autocomplete-item';
+                item.textContent = opt;
+                item.addEventListener('click', () => {
+                    svcxdInput.value = opt;
+                    svcxdList.style.display = 'none';
+                });
+                svcxdList.appendChild(item);
+            });
+            svcxdList.style.display = 'block';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.autocomplete-wrapper')) {
+                svcxdList.style.display = 'none';
+            }
+        });
+
+        // ── Auto-preencher Frota pelo ID Demanda ────────────────────────────
+        document.getElementById('demanda').addEventListener('input', function() {
+            const val = this.value.trim().toUpperCase();
+            const frota = document.getElementById('frota');
+            if (val.startsWith('FF_')) {
+                frota.value = 'Fixa';
+            } else if (/^\d/.test(val)) {
+                frota.value = 'Spot';
+            }
+        });
+
+        // ── ANTT condicional ────────────────────────────────────────────────
+        document.getElementById('tipoAntt').addEventListener('change', function() {
+            const cnpjGroup = document.getElementById('cnpjGroup');
+            const cnpjInput = document.getElementById('cnpjAntt');
+            if (this.value === 'PJ') {
+                cnpjGroup.style.display = 'block';
+                cnpjInput.required = true;
+            } else {
+                cnpjGroup.style.display = 'none';
+                cnpjInput.required = false;
+                cnpjInput.value = '';
+            }
+        });
+
+        // ── Formatações automáticas ─────────────────────────────────────────
+        document.getElementById('cpf').addEventListener('input', function() {
+            let v = this.value.replace(/\D/g, '').slice(0, 11);
+            v = v.replace(/(\d{3})(\d)/, '$1.$2');
+            v = v.replace(/(\d{3})(\d)/, '$1.$2');
+            v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            this.value = v;
+        });
+
+        document.getElementById('cnpjAntt').addEventListener('input', function() {
+            let v = this.value.replace(/\D/g, '').slice(0, 14);
+            v = v.replace(/(\d{2})(\d)/, '$1.$2');
+            v = v.replace(/(\d{3})(\d)/, '$1.$2');
+            v = v.replace(/(\d{3})(\d)/, '$1/$2');
+            v = v.replace(/(\d{4})(\d{1,2})$/, '$1-$2');
+            this.value = v;
+        });
+
+        document.getElementById('placa').addEventListener('input', function() {
+            this.value = this.value.toUpperCase();
+        });
+
+        document.getElementById('motorista').addEventListener('input', function() {
+            this.value = this.value.toUpperCase();
+        });
+
+        document.getElementById('titularAntt').addEventListener('input', function() {
+            this.value = this.value.toUpperCase();
+        });
+
+        // ── Validações ──────────────────────────────────────────────────────
+        function validarCPF(cpf) {
+            cpf = cpf.replace(/\D/g, '');
+            if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+            let sum = 0;
+            for (let i = 0; i < 9; i++) sum += parseInt(cpf[i]) * (10 - i);
+            let r = (sum * 10) % 11;
+            if (r === 10 || r === 11) r = 0;
+            if (r !== parseInt(cpf[9])) return false;
+            sum = 0;
+            for (let i = 0; i < 10; i++) sum += parseInt(cpf[i]) * (11 - i);
+            r = (sum * 10) % 11;
+            if (r === 10 || r === 11) r = 0;
+            return r === parseInt(cpf[10]);
+        }
+
+        function validarCNPJ(cnpj) {
+            cnpj = cnpj.replace(/\D/g, '');
+            if (cnpj.length !== 14 || /^(\d)\1+$/.test(cnpj)) return false;
+            let len = cnpj.length - 2, nums = cnpj.slice(0, len), digits = cnpj.slice(len);
+            let sum = 0, pos = len - 7;
+            for (let i = len; i >= 1; i--) {
+                sum += parseInt(nums[len - i]) * pos--;
+                if (pos < 2) pos = 9;
+            }
+            let r = sum % 11 < 2 ? 0 : 11 - (sum % 11);
+            if (r !== parseInt(digits[0])) return false;
+            len++; nums = cnpj.slice(0, len); sum = 0; pos = len - 7;
+            for (let i = len; i >= 1; i--) {
+                sum += parseInt(nums[len - i]) * pos--;
+                if (pos < 2) pos = 9;
+            }
+            r = sum % 11 < 2 ? 0 : 11 - (sum % 11);
+            return r === parseInt(digits[1]);
+        }
+
+        function showError(id, show) {
+            const el = document.getElementById('err-' + id);
+            if (el) el.style.display = show ? 'block' : 'none';
+            const input = document.getElementById(id);
+            if (input) {
+                input.classList.toggle('error', show);
+                input.classList.toggle('success', !show && input.value);
+            }
+        }
+
+        function validarFormulario() {
+            let valido = true;
+
+            if (!document.getElementById('assistente').value) { showError('assistente', true); valido = false; } else showError('assistente', false);
+            if (!document.getElementById('svcxd').value.trim()) { showError('svcxd', true); valido = false; } else showError('svcxd', false);
+
+            const motorista = document.getElementById('motorista').value.trim();
+            if (!motorista) { showError('motorista', true); valido = false; } else showError('motorista', false);
+
+            const cpf = document.getElementById('cpf').value;
+            if (!validarCPF(cpf)) { showError('cpf', true); valido = false; } else showError('cpf', false);
+
+            if (!document.getElementById('tel').value.trim()) { showError('tel', true); valido = false; } else showError('tel', false);
+            if (!document.getElementById('perfil').value) { showError('perfil', true); valido = false; } else showError('perfil', false);
+            if (!document.getElementById('placa').value.trim()) { showError('placa', true); valido = false; } else showError('placa', false);
+
+            const email = document.getElementById('email').value;
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email', true); valido = false; } else showError('email', false);
+
+            if (!document.getElementById('tipoAntt').value) { showError('tipoAntt', true); valido = false; } else showError('tipoAntt', false);
+            if (!document.getElementById('titularAntt').value.trim()) { showError('titularAntt', true); valido = false; } else showError('titularAntt', false);
+
+            const tipoAntt = document.getElementById('tipoAntt').value;
+            if (tipoAntt === 'PJ') {
+                const cnpj = document.getElementById('cnpjAntt').value;
+                if (!validarCNPJ(cnpj)) { showError('cnpjAntt', true); valido = false; } else showError('cnpjAntt', false);
+            }
+
+            const demanda = document.getElementById('demanda').value.trim();
+            if (!demanda || (!/^FF_\d+$/i.test(demanda) && !/^\d+$/.test(demanda))) { showError('demanda', true); valido = false; } else showError('demanda', false);
+
+            if (!document.getElementById('frota').value) { showError('frota', true); valido = false; } else showError('frota', false);
+            if (!document.getElementById('milha').value) { showError('milha', true); valido = false; } else showError('milha', false);
+            if (!document.getElementById('status').value) { showError('status', true); valido = false; } else showError('status', false);
+
+            return valido;
+        }
+
+        // ── Submit ──────────────────────────────────────────────────────────
+        let dadosSalvos = null;
+        let jaSalvou = false;
+
         document.getElementById('contratoForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Pegar os valores
+            if (!validarFormulario()) return;
+
             const assistente = document.getElementById('assistente').value;
             const svcxd = document.getElementById('svcxd').value;
             const motorista = document.getElementById('motorista').value.toUpperCase();
             const cpf = document.getElementById('cpf').value;
+            const cpfLimpo = cpf.replace(/\D/g, '');
             const tel = document.getElementById('tel').value;
             const perfil = document.getElementById('perfil').value;
-            const placa = document.getElementById('placa').value;
+            const placa = document.getElementById('placa').value.toUpperCase();
             const email = document.getElementById('email').value;
+            const tipoAntt = document.getElementById('tipoAntt').value;
             const titularAntt = document.getElementById('titularAntt').value.toUpperCase();
-            const demanda = document.getElementById('demanda').value;
+            const cnpjAntt = tipoAntt === 'PJ' ? document.getElementById('cnpjAntt').value : '';
+            const demanda = document.getElementById('demanda').value.trim();
             const cavalo = document.getElementById('cavalo').value.trim() || '-';
             const cluster = document.getElementById('cluster').value.trim() || '-';
             const etc = document.getElementById('etc').value.trim() || '';
             const frota = document.getElementById('frota').value;
             const milha = document.getElementById('milha').value;
             const status = document.getElementById('status').value;
+            const linkInfobip = document.getElementById('linkInfobip').value.trim();
             const obs = document.getElementById('obs').value.trim();
-            
-            // Guardar dados para enviar ao Sheets (ordem correta)
-            dadosContratacao = {
-                assistente: assistente,
-                idDemanda: demanda,
-                nome: motorista,
-                telefone: tel,
-                placa: placa,
-                cavalo: cavalo,
-                cpf: cpf,
-                cluster: cluster,
-                etc: etc,
-                perfilVeiculo: perfil,
-                frota: frota,
-                status: status,
-                milha: milha,
-                email: email,
-                titularAntt: titularAntt
-            };
-            
-            // Montar a mensagem
-            mensagemGerada = `CONTRATAÇÃO: ${svcxd}\n• Motorista: ${motorista}\n• CPF: ${cpf}\n• Tel: ${tel}\n• Perfil do Veiculo: ${perfil}\n• Placa: ${placa}\n• E-mail: ${email}\n• Titular ANTT: ${titularAntt}\n• Demanda: ${demanda}`;
-            
-            // Adicionar campos opcionais apenas se preenchidos
-            if (cavalo !== '-') {
-                mensagemGerada += `\n• Cavalo: ${cavalo}`;
-            }
-            if (cluster !== '-') {
-                mensagemGerada += `\n• Cluster: ${cluster}`;
-            }
-            if (etc) {
-                mensagemGerada += `\n• ETC: ${etc}`;
-            }
-            
-            // Adicionar campos obrigatórios
-            mensagemGerada += `\n• Frota: ${frota}`;
-            mensagemGerada += `\n• Milha: ${milha}`;
-            mensagemGerada += `\n• Status: ${status}`;
-            
-            if (obs) {
-                mensagemGerada += `\n${obs} 📲`;
-            }
-            
-            // Mostrar resultado
-            document.getElementById('outputText').textContent = mensagemGerada;
+
+            dadosSalvos = { assistente, idDemanda: demanda, nome: motorista, telefone: tel, placa, cavalo, cpf: cpfLimpo, cluster, etc, perfilVeiculo: perfil, frota, status, milha, email, titularAntt, cnpjAntt, linkInfobip };
+
+            let msg = `OFERTA: ${svcxd}\n• Motorista: ${motorista}\n• CPF: ${cpf}\n• Tel: ${tel}\n• Perfil do Veiculo: ${perfil}\n• Placa: ${placa}\n• E-mail: ${email}\n• Titular ANTT: ${titularAntt}`;
+            if (cnpjAntt) msg += `\n• CNPJ ANTT: ${cnpjAntt}`;
+            msg += `\n• Demanda: ${demanda}`;
+            if (cavalo !== '-') msg += `\n• Cavalo: ${cavalo}`;
+            if (cluster !== '-') msg += `\n• Cluster: ${cluster}`;
+            if (etc) msg += `\n• ETC: ${etc}`;
+            msg += `\n• Frota: ${frota}\n• Milha: ${milha}\n• Status: ${status}`;
+            if (obs) msg += `\n${obs} 📲`;
+
+            document.getElementById('outputText').textContent = msg;
             document.getElementById('outputContainer').style.display = 'block';
-            
-            // Atualizar link do WhatsApp
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(mensagemGerada)}`;
-            document.getElementById('whatsappBtn').href = whatsappUrl;
-            
-            // Limpar mensagem de status anterior
+            document.getElementById('whatsappBtn').href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
             document.getElementById('statusMessage').style.display = 'none';
-            
-            // Scroll suave até o resultado
+
+            // Resetar botão salvar para nova mensagem
+            jaSalvou = false;
+            const sheetsBtn = document.getElementById('sheetsBtn');
+            sheetsBtn.textContent = '📊 Salvar no Sheets';
+            sheetsBtn.disabled = false;
+
             document.getElementById('outputContainer').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         });
-        
-        // Função de copiar
+
+        // ── Copiar ──────────────────────────────────────────────────────────
         document.getElementById('copyBtn').addEventListener('click', function() {
-            const texto = document.getElementById('outputText').textContent;
-            navigator.clipboard.writeText(texto).then(() => {
-                const btn = document.getElementById('copyBtn');
-                const originalText = btn.textContent;
-                btn.textContent = '✅ Copiado!';
-                btn.classList.add('copied');
-                
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.classList.remove('copied');
-                }, 2000);
+            navigator.clipboard.writeText(document.getElementById('outputText').textContent).then(() => {
+                this.textContent = '✅ Copiado!';
+                this.classList.add('copied');
+                setTimeout(() => { this.textContent = '📋 Copiar'; this.classList.remove('copied'); }, 2000);
             });
         });
-        
-        // Função salvar no Google Sheets via Google Forms
+
+        // ── Salvar no Sheets ────────────────────────────────────────────────
         document.getElementById('sheetsBtn').addEventListener('click', function() {
-            const btn = this;
-            
-            if (!dadosContratacao) {
-                mostrarStatus('Erro: Gere a mensagem primeiro!', 'error');
-                return;
-            }
-            
+            if (!dadosSalvos) { mostrarStatus('Gere a mensagem primeiro!', 'error'); return; }
+            if (jaSalvou) { mostrarStatus('⚠️ Estes dados já foram salvos!', 'error'); return; }
+
+            // Mostrar modal de confirmação
+            const d = dadosSalvos;
+            document.getElementById('modalData').innerHTML = `
+                <p><strong>Assistente:</strong> ${d.assistente}</p>
+                <p><strong>Nome:</strong> ${d.nome}</p>
+                <p><strong>CPF:</strong> ${d.cpf}</p>
+                <p><strong>Demanda:</strong> ${d.idDemanda}</p>
+                <p><strong>Placa:</strong> ${d.placa}</p>
+                <p><strong>Frota:</strong> ${d.frota} | <strong>Milha:</strong> ${d.milha}</p>
+                <p><strong>Status:</strong> ${d.status}</p>
+            `;
+            document.getElementById('modalOverlay').classList.add('active');
+        });
+
+        document.getElementById('modalCancel').addEventListener('click', function() {
+            document.getElementById('modalOverlay').classList.remove('active');
+        });
+
+        document.getElementById('modalConfirm').addEventListener('click', function() {
+            document.getElementById('modalOverlay').classList.remove('active');
+
+            const btn = document.getElementById('sheetsBtn');
             btn.disabled = true;
             btn.textContent = '⏳ Salvando...';
-            
-            // Preencher o formulário do Google (ordem correta)
-            document.getElementById('formAssistente').value = dadosContratacao.assistente;
-            document.getElementById('formIdDemanda').value = dadosContratacao.idDemanda;
-            document.getElementById('formNome').value = dadosContratacao.nome;
-            document.getElementById('formTelefone').value = dadosContratacao.telefone;
-            document.getElementById('formPlaca').value = dadosContratacao.placa;
-            document.getElementById('formCavalo').value = dadosContratacao.cavalo;
-            document.getElementById('formCpf').value = dadosContratacao.cpf;
-            document.getElementById('formCluster').value = dadosContratacao.cluster;
-            document.getElementById('formEtc').value = dadosContratacao.etc;
-            document.getElementById('formPerfilVeiculo').value = dadosContratacao.perfilVeiculo;
-            document.getElementById('formFrota').value = dadosContratacao.frota;
-            document.getElementById('formStatus').value = dadosContratacao.status;
-            document.getElementById('formMilha').value = dadosContratacao.milha;
-            document.getElementById('formEmail').value = dadosContratacao.email;
-            document.getElementById('formTitularAntt').value = dadosContratacao.titularAntt;
-            
-            // Enviar o formulário
+
+            const d = dadosSalvos;
+            document.getElementById('formAssistente').value = d.assistente;
+            document.getElementById('formIdDemanda').value = d.idDemanda;
+            document.getElementById('formNome').value = d.nome;
+            document.getElementById('formTelefone').value = d.telefone;
+            document.getElementById('formPlaca').value = d.placa;
+            document.getElementById('formCavalo').value = d.cavalo;
+            document.getElementById('formCpf').value = d.cpf;
+            document.getElementById('formCluster').value = d.cluster;
+            document.getElementById('formEtc').value = d.etc;
+            document.getElementById('formPerfilVeiculo').value = d.perfilVeiculo;
+            document.getElementById('formFrota').value = d.frota;
+            document.getElementById('formStatus').value = d.status;
+            document.getElementById('formMilha').value = d.milha;
+            document.getElementById('formEmail').value = d.email;
+            document.getElementById('formTitularAntt').value = d.titularAntt;
+            document.getElementById('formCnpjAntt').value = d.cnpjAntt;
+            document.getElementById('formLinkInfobip').value = d.linkInfobip;
+
             document.getElementById('googleForm').submit();
-            
-            // Feedback de sucesso
+
             setTimeout(() => {
+                jaSalvou = true;
                 mostrarStatus('✅ Dados salvos na planilha com sucesso!', 'success');
                 btn.textContent = '✅ Salvo!';
-                
-                setTimeout(() => {
-                    btn.textContent = '📊 Salvar no Sheets';
-                    btn.disabled = false;
-                }, 2000);
             }, 1500);
         });
-        
-        function mostrarStatus(mensagem, tipo) {
-            const statusDiv = document.getElementById('statusMessage');
-            statusDiv.className = `status-message alert alert-${tipo}`;
-            statusDiv.textContent = mensagem;
-            statusDiv.style.display = 'block';
+
+        function mostrarStatus(msg, tipo) {
+            const el = document.getElementById('statusMessage');
+            el.className = `status-message alert alert-${tipo}`;
+            el.textContent = msg;
+            el.style.display = 'block';
         }
-        
-        // Auto-formatação de CPF
-        document.getElementById('cpf').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value.length <= 11) {
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d)/, '$1.$2');
-                value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-                e.target.value = value;
-            }
-        });
     </script>
 </body>
 </html>
