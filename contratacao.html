@@ -394,24 +394,6 @@
             const btn = document.getElementById('sheetsBtn');
             btn.disabled = true; btn.textContent = '⏳ Salvando...';
             const d = dadosContratacao;
-            document.getElementById('formAssistente').value = d.assistente;
-            document.getElementById('formIdDemanda').value = d.idDemanda;
-            document.getElementById('formNome').value = d.nome;
-            document.getElementById('formTelefone').value = d.telefone;
-            document.getElementById('formPlaca').value = d.placa;
-            document.getElementById('formCavalo').value = d.cavalo;
-            document.getElementById('formCpf').value = d.cpf;
-            document.getElementById('formCluster').value = d.cluster;
-            document.getElementById('formEtc').value = d.etc;
-            document.getElementById('formPerfilVeiculo').value = d.perfilVeiculo;
-            document.getElementById('formFrota').value = d.frota;
-            document.getElementById('formStatus').value = d.status;
-            document.getElementById('formMilha').value = d.milha;
-            document.getElementById('formUserId').value = d.userId;
-            document.getElementById('formEmail').value = d.email;
-            document.getElementById('formTitularAntt').value = d.titularAntt;
-            document.getElementById('formCnpjAntt').value = d.cnpjAntt;
-            document.getElementById('formLinkInfobip').value = d.linkInfobip;
             submitToGoogleForms(d);
             setTimeout(() => {
                 jaSalvou = true;
