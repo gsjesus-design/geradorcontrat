@@ -54,7 +54,6 @@
         .modal-confirm { flex: 1; padding: 12px; background: linear-gradient(135deg, #FFE600 0%, #f0d800 100%); color: #2D3277; border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; }
         .modal-cancel { flex: 1; padding: 12px; background: #e0e0e0; color: #555; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; }
         #cnpjGroup { display: none; }
-        #googleForm { display: none; }
         @media (max-width: 768px) { .grid, .grid-3 { grid-template-columns: 1fr; } .btn-group { flex-direction: column; width: 100%; } .output-header { flex-direction: column; align-items: flex-start; gap: 10px; } .copy-btn, .whatsapp-btn, .sheets-btn { width: 100%; } }
     </style>
 </head>
@@ -228,29 +227,6 @@
         </div>
     </div>
 
-    <form id="googleForm" 
-          action="https://docs.google.com/forms/d/e/1FAIpQLSf8HNEi59tlP8n3OsxgzGorv29x02bsB9pTod6LIfDib-T5GA/formResponse" 
-          method="POST" 
-          target="hidden_iframe">
-        <input type="text" name="entry.473056928" id="formAssistente">
-        <input type="text" name="entry.680363877" id="formIdDemanda">
-        <input type="text" name="entry.282676985" id="formNome">
-        <input type="text" name="entry.158343860" id="formTelefone">
-        <input type="text" name="entry.825422823" id="formPlaca">
-        <input type="text" name="entry.1524407042" id="formCavalo">
-        <input type="text" name="entry.1492406883" id="formCpf">
-        <input type="text" name="entry.809352265" id="formCluster">
-        <input type="text" name="entry.507728727" id="formEtc">
-        <input type="text" name="entry.620086218" id="formPerfilVeiculo">
-        <input type="text" name="entry.427512297" id="formFrota">
-        <input type="text" name="entry.1993016572" id="formStatus">
-        <input type="text" name="entry.899990801" id="formMilha">
-        <input type="text" name="entry.238083866" id="formUserId">
-        <input type="text" name="entry.1548588405" id="formEmail">
-        <input type="text" name="entry.45197638" id="formTitularAntt">
-        <input type="text" name="entry.864262651" id="formCnpjAntt">
-        <input type="text" name="entry.291121062" id="formLinkInfobip">
-    </form>
 
     <script>
         const svcxdOptions = ["BRXRS1 - RS","SSP5 - ARE","SSP45 - Itaquera","BRXSP6 - GRU I","BRXSP2 - CPS","SSP28 - Jales","BRXSP4 - SBC","BRXSP10 - GRU II","BRXSP1 - ARE","BRXSP7 - BAU","BRXSP5 - RAO","BRXSC2 - SC","SMG14 - Nova Lima","SSP14 - BAU","SMG8 - Vespasiano","SRS8 - Sapucaia do Sul","SPR8 - Campina Grande do Sul","SRS1 - Porto Alegre","SSP29 - Mogi Mirim","SSP30 - GRU","SSP4 - Ribeirão Preto","BRRC01 - Perus","BRXSP14 - MAR","SSP27 - Itapetininga","SSP18 - Jundiaí","SPR6 - Maringá","SSP1 - ZS","SSP3 - CPS","SSP8 - SJC","SSP9 - Limeira","SPR2 - Londrina","SES1 - Vitória","SSP11 - PRU","SSP17 - SBC","XPR1 - CWB","BRXES1 - ES","SSP36 - Piracicaba","BRXRJ1 - RJ","SSP38 - Itupeva","SSP40 - ZN","BRXMG1 - MG","BRXSP11 - PRU","SSP24 - Avaré","SSP7 - ZO","SSP12 - SJRP","SSP31 - Barretos","BRRC02 - Sumaré","SSP22 - São Carlos","BRSP11 - PRU","SSP13 - MAR","Hibrido","SSP10 - Araçatuba","SSP26 - Franca","SSC1 - Joinville","SSC2 - Florianópolis","SBA1 - Salvador","SGO1 - Goiânia","SMG10 - Divinópolis","SMG3 - Pouso Alegre","SSP15 - Santos","SSP21 - Mooca","SMG1 - Contagem","SSP20 - Sorocaba","SBA2 - Feira de Santana","SDF1 - Brasília","SPR1 - Curitiba","SBA3 - Vitória da Conquista","SMG6 - Uberlândia","SDF2 - Brasília 2","SRS10 - Lajeado","SMG11 - Patos de Minas","SPR3 - Cascavel","SSP34 - Cotia","SPR5 - Guarapuava","SRS4 - Caxias do Sul","SSC3 - Gaspar","SMG9 - Varginha","SMG2 - Juiz de Fora","SMG15 - Contagem","SPR7 - Ponta Grossa","SSP23 - Mogi das Cruzes","SSP6 - ZL","-","SSC8 - Itajaí","SPE1 - Recife","BRXSD1 - XDSD SP","SCE1 - Fortaleza","SBA6 - Salvador","SSE1 - Aracaju","SRJ3 - Volta Redonda","SMN1 - São Luís","STO1 - Palmas","SJP1 - João Pessoa","SMR1 - Cuiabá","SSC4 - Chapecó","SAL1 - Maceió","SPI1 - Teresina","SRN1 - Natal","SPA1 - Belém","SSC9 - Governador Celso Ramos","BRXMG3 - Pouso Alegre","ZN - Zona Norte","BRSP06 - Araçariguama","BRMG02 - Betim","BRSC02 - Governador Celso Ramos","SRS2 - Pelotas","SSP48 - Jaguaré","SSP49 - Zona Norte","SRS9 - Santa Rita","SSP25 - Atibaia","BRSP11 - Guarulhos","Full SSP11 - PRU","Full SSP12 - SJRP","Full SSP22 - São Carlos","SRJ10 - RJ Barra","BRRJ02 - São João de Meriti","BRXGO1 - Goiânia","SRJ1 - Cordovil","Full SES1 - Vitória","SRJ2 - Queimados","SRJ8 - Niterói","SSP46 - Santos 2","SSP16 - Caraguatatuba","SRJ5 - Petrópolis","BRXPR4 - Maringá","SGO3 - Hidrolândia","SRJ1 - Rio de Janeiro","BRXSP18 - Santo André","BRXPR3 - Cascavel","BRXPR2 - Londrina","BRXPE1 - Jaboatão dos Guararapes","BRXMG2 - Uberlândia","BRXBA1 - Simões Filho","BRXCE1 - Itaitinga"];
